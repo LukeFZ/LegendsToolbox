@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "BadgerSerialization.Generator": {
+      "commandName": "Project"
+    },
+    "Source Generator Debug": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\LegendsToolbox.Core\\LegendsToolbox.Core.csproj"
+    }
+  }
+}

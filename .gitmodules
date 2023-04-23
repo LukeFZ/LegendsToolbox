@@ -1,0 +1,3 @@
+[submodule "XblContainerReader"]
+	path = XblContainerReader
+	url = https://github.com/LukeFZ/XblContainerReader

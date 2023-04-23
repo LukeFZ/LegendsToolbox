@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33027.239
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegendsToolbox.Cli", "LegendsToolbox.Cli\LegendsToolbox.Cli.csproj", "{17C6CAD6-5EA1-41F7-9BC8-1DDA4B5AEA62}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegendsToolbox.Core", "LegendsToolbox.Core\LegendsToolbox.Core.csproj", "{4EEE2A58-575E-4038-BBA7-2DE2D8960298}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadgerSerialization", "BadgerSerialization\BadgerSerialization.csproj", "{DC6F1189-80AE-4B43-AED9-150E982B04DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadgerSerialization.Generator", "BadgerSerialization.Generator\BadgerSerialization.Generator.csproj", "{4A8DD7D5-4F1D-4CC5-93C2-986A8DFBD745}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadgerSerialization.Core", "BadgerSerialization.Core\BadgerSerialization.Core.csproj", "{3C74E660-E2E3-4439-9CA3-DB0C93727980}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibXblContainer", "XblContainerReader\LibXblContainer\LibXblContainer.csproj", "{D60B476E-4308-4A15-8024-D0965B6C3244}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17C6CAD6-5EA1-41F7-9BC8-1DDA4B5AEA62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17C6CAD6-5EA1-41F7-9BC8-1DDA4B5AEA62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17C6CAD6-5EA1-41F7-9BC8-1DDA4B5AEA62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17C6CAD6-5EA1-41F7-9BC8-1DDA4B5AEA62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EEE2A58-575E-4038-BBA7-2DE2D8960298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EEE2A58-575E-4038-BBA7-2DE2D8960298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EEE2A58-575E-4038-BBA7-2DE2D8960298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EEE2A58-575E-4038-BBA7-2DE2D8960298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6F1189-80AE-4B43-AED9-150E982B04DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6F1189-80AE-4B43-AED9-150E982B04DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6F1189-80AE-4B43-AED9-150E982B04DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6F1189-80AE-4B43-AED9-150E982B04DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A8DD7D5-4F1D-4CC5-93C2-986A8DFBD745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A8DD7D5-4F1D-4CC5-93C2-986A8DFBD745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A8DD7D5-4F1D-4CC5-93C2-986A8DFBD745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A8DD7D5-4F1D-4CC5-93C2-986A8DFBD745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C74E660-E2E3-4439-9CA3-DB0C93727980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C74E660-E2E3-4439-9CA3-DB0C93727980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C74E660-E2E3-4439-9CA3-DB0C93727980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C74E660-E2E3-4439-9CA3-DB0C93727980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60B476E-4308-4A15-8024-D0965B6C3244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60B476E-4308-4A15-8024-D0965B6C3244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60B476E-4308-4A15-8024-D0965B6C3244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60B476E-4308-4A15-8024-D0965B6C3244}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {836E8BB8-22D8-43F9-AA80-30C9C49E7BA8}
+	EndGlobalSection
+EndGlobal
