@@ -42,27 +42,21 @@ public class BadgerSerializedBlock : BadgerObject
     {
         Value = new SerializedBlock();
 
-        var blockId = reader.ReadVarUInt32() - 1;
-        Debug.Assert(blockId != 0, "defaultBlockId != 0");
+        var unkBlockLength = reader.ReadVarUInt32();
+        Debug.Assert(unkBlockLength == 0, "unkBlockLength != 0");
 
-        if (blockId != 0)
+        if (unkBlockLength == 0)
         {
             var hasSerializedBlock = reader.ReadBoolean();
             if (!hasSerializedBlock)
                 return;
 
-            var nameHash = reader.ReadVarUInt64();
-            var propertyCount = reader.ReadByte();
-
-            var properties = new Dictionary<ulong, byte>();
-            for (int i = 0; i < propertyCount; i++)
-            {
-                var propertyHash = reader.ReadVarUInt64();
-                var propertyValue = reader.ReadByte();
-                properties[propertyHash] = propertyValue;
-            }
-
-            Value = new SerializedBlock(blockId, nameHash, properties);
+            Value = reader.ReadSerializedBlock();
+        }
+        else
+        {
+            var unkBlockBytes = reader.ReadBytes((int)unkBlockLength);
+            Value = new SerializedBlock(0, 0, new Dictionary<ulong, byte>());
         }
     }
 

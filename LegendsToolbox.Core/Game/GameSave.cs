@@ -1,6 +1,6 @@
-﻿namespace LegendsToolbox.Core;
+﻿namespace LegendsToolbox.Core.Game;
 
-public class SaveData
+public class GameSave
 {
     public List<World> Worlds { get; }
     public string FullPath => _saveDirectory.FullName;
@@ -10,13 +10,13 @@ public class SaveData
     private const string WorldsFolder = "minecraftWorlds";
     private const string TutorialWorld = "AssetViewerFlatland";
 
-    private SaveData(DirectoryInfo saveDirectory)
+    public GameSave(DirectoryInfo saveDirectory)
     {
         _saveDirectory = saveDirectory;
         Worlds = new List<World>();
     }
 
-    private async Task LoadAsync()
+    public async Task LoadAsync()
     {
         var path = FullPath;
 
@@ -38,22 +38,5 @@ public class SaveData
                 // ignored
             }
         }
-    }
-
-    public static async Task<SaveData> LoadFromContainerAsync(string containerPath)
-    {
-        var containerInterface = await ContainerInterface.Load(containerPath);
-        var save = new SaveData(containerInterface.GetSaveDirectory());
-        await save.LoadAsync();
-
-        return save;
-    }
-
-    public static async Task<SaveData> LoadFromDirectoryAsync(string saveDirectory)
-    {
-        var save = new SaveData(new DirectoryInfo(saveDirectory));
-        await save.LoadAsync();
-
-        return save;
     }
 }

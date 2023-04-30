@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Numerics;
 using System.Text;
+using BadgerSerialization.Models;
 
 namespace BadgerSerialization;
 
@@ -56,5 +57,17 @@ public class BadgerBinaryWriter : BinaryWriter
     {
         Write(value.X);
         Write(value.Y);
+    }
+
+    [DebuggerStepThrough]
+    public void Write(SerializedBlock value)
+    {
+        WriteVarUInt64(value.NameHash);
+        Write((byte)value.States.Count);
+        foreach (var state in value.States)
+        {
+            WriteVarUInt64(state.Key);
+            Write(state.Value);
+        }
     }
 }

@@ -9,7 +9,10 @@ public class BadgerOptionalString : BadgerObject
 
     public string? Value { get; set; }
 
-    public BadgerOptionalString(string name, string? value = null) : base(name) { }
+    public BadgerOptionalString(string name, string? value = null) : base(name)
+    {
+        Value = value;
+    }
 
     public override void Serialize(BadgerBinaryWriter writer)
     {

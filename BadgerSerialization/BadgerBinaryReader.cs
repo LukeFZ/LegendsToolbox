@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Text;
 using BadgerSerialization.BlockApi;
 using BadgerSerialization.Core;
+using BadgerSerialization.Models;
 
 namespace BadgerSerialization;
 
@@ -70,6 +71,22 @@ public class BadgerBinaryReader : BinaryReader
         var x = ReadSingle();
         var y = ReadSingle();
         return new Vector2(x, y);
+    }
+
+    [DebuggerStepThrough]
+    public SerializedBlock ReadSerializedBlock()
+    {
+        var nameHash = ReadVarUInt64();
+        var count = ReadByte();
+        var states = new Dictionary<ulong, byte>();
+        for (int i = 0; i < count; i++)
+        {
+            var state = ReadVarUInt64();
+            var value = ReadByte();
+            states.Add(state, value);
+        }
+
+        return new SerializedBlock(0, nameHash, states);
     }
 
     #region Block API Methods

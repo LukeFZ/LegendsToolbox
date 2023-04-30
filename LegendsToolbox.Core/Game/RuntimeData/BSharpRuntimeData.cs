@@ -1,6 +1,6 @@
 ﻿using MiNET.LevelDB;
 
-namespace LegendsToolbox.Core.RuntimeData;
+namespace LegendsToolbox.Core.Game.RuntimeData;
 
 public class BSharpRuntimeData : GameLayerRuntimeData
 {

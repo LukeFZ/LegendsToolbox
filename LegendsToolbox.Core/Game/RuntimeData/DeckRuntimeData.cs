@@ -2,6 +2,7 @@
 using BadgerSerialization.Core;
 using BadgerSerialization.Core.Attributes;
 using BadgerSerialization.Interfaces;
+using LegendsToolbox.Core.Game.RuntimeData;
 
 namespace LegendsToolbox.Core.RuntimeData;
 

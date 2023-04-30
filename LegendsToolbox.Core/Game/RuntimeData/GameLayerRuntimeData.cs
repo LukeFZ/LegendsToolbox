@@ -3,7 +3,7 @@ using BadgerSerialization.Types;
 using fNbt;
 using MiNET.LevelDB;
 
-namespace LegendsToolbox.Core.RuntimeData;
+namespace LegendsToolbox.Core.Game.RuntimeData;
 
 public abstract class GameLayerRuntimeData
 {

@@ -1,27 +1,36 @@
-﻿using BadgerSerialization.Core;
+﻿using System.Text;
+using BadgerSerialization.Core;
 
 namespace BadgerSerialization.Types;
 
-public class BadgerOptionalVarUInt : BadgerVarUInt
+public class BadgerOptionalVarUInt : BadgerObject
 {
     public override BadgerObjectType Type => BadgerObjectType.OptionalVarUInt;
-    public BadgerOptionalVarUInt(string name, uint value = 0) : base(name, value) { }
+
+    public uint? Value { get; set; }
+
+    public BadgerOptionalVarUInt(string name, uint? value = null) : base(name)
+    {
+        Value = value;
+    }
 
     public override void Serialize(BadgerBinaryWriter writer)
     {
-        var hasValue = Value != 0;
-        writer.Write(hasValue);
+        writer.Write(Value.HasValue);
 
-        if (hasValue)
-            base.Serialize(writer);
+        if (Value.HasValue)
+            writer.WriteVarUInt32(Value.Value + 1);
     }
 
     public override void Deserialize(BadgerBinaryReader reader, uint maxLength)
     {
-        Value = 0;
+        Value = null;
         if (!reader.ReadBoolean())
             return;
 
-        base.Deserialize(reader, maxLength - 1);
+        Value = reader.ReadVarUInt32() - 1;
     }
+
+    public override void PrintValue(StringBuilder sb, int indentLevel, string indentString)
+        => sb.Append(Value.HasValue ? Value : "null");
 }

@@ -41,5 +41,5 @@ public class BadgerOptionalStringList : BadgerObject
     }
 
     public override void PrintValue(StringBuilder sb, int indentLevel, string indentString)
-        => sb.Append($"[\"{string.Join("\",\"", Value)}\"]");
+        => sb.Append(Value == null ? "null" : $"[\"{string.Join("\",\"", Value)}\"]");
 }
