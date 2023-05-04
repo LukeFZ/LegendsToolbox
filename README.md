@@ -9,5 +9,5 @@ Parsing all serialized badger ECS components in the world database
 (De)serialization code generation for C# representations of components
 
 # For Developers
-We have a modding discord for Minecraft Legends @ https://discord.gg/W9QdMdPsP8, where we discuss everything related to the game.
+We have a modding discord for Minecraft Legends @ https://discord.gg/vGN8fztme4, where we discuss everything related to the game.
 
