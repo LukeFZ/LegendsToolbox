@@ -2,18 +2,19 @@
 
 public struct SerializedBlock
 {
-    public uint BlockId;
+    public uint EntityRuntimeId;
     public ulong NameHash;
     public Dictionary<ulong, byte> States;
 
-    public SerializedBlock(uint blockId, ulong nameHash, Dictionary<ulong, byte> states)
+    public SerializedBlock(ulong nameHash, Dictionary<ulong, byte> states, uint entityRuntimeId = uint.MaxValue)
     {
-        BlockId = blockId;
+        EntityRuntimeId = entityRuntimeId;
         NameHash = nameHash;
         States = states;
     }
 
     public override string ToString()
-        =>
-            $"{{\"blockId\": {BlockId}, \"nameHash\": {NameHash}, \"states\": [{string.Join(", ", States.Select(pair => $"{{\"nameHash\": {pair.Key}, \"value\": {pair.Value}}}"))}]}}";
+        => EntityRuntimeId == uint.MaxValue
+            ? $"{{\"nameHash\": {NameHash}, \"states\": [{string.Join(", ", States.Select(pair => $"{{\"nameHash\": {pair.Key}, \"value\": {pair.Value}}}"))}]}}"
+            : $"{{\"entityRuntimeId\": {EntityRuntimeId}, \"nameHash\": {NameHash}, \"states\": [{string.Join(", ", States.Select(pair => $"{{\"nameHash\": {pair.Key}, \"value\": {pair.Value}}}"))}]}}";
 }

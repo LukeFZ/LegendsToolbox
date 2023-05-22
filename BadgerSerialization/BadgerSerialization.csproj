@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="BlockApi\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Nbt\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -38,6 +38,15 @@ public class BadgerBinaryReader : BinaryReader
         return value;
     }
 
+    public long ReadVarInt64()
+    {
+        var val = ReadVarUInt64();
+        if ((val & 1) == 0)
+            return (long)(val >> 1);
+        
+        return (long)~(val >> 1);
+    }
+
     [DebuggerStepThrough]
     public BadgerObjectType ReadType()
     {
@@ -76,17 +85,17 @@ public class BadgerBinaryReader : BinaryReader
     [DebuggerStepThrough]
     public SerializedBlock ReadSerializedBlock()
     {
-        var nameHash = ReadVarUInt64();
+        var nameHash = ReadVarInt64();
         var count = ReadByte();
         var states = new Dictionary<ulong, byte>();
         for (int i = 0; i < count; i++)
         {
-            var state = ReadVarUInt64();
+            var state = (ulong)ReadVarInt64();
             var value = ReadByte();
             states.Add(state, value);
         }
 
-        return new SerializedBlock(0, nameHash, states);
+        return new SerializedBlock((ulong)nameHash, states);
     }
 
     #region Block API Methods

@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33027.239
@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadgerSerialization.Core", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibXblContainer", "XblContainerReader\LibXblContainer\LibXblContainer.csproj", "{D60B476E-4308-4A15-8024-D0965B6C3244}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendsToolbox.SaveProviders.Xbox", "LegendsToolbox.SaveProviders.Xbox\LegendsToolbox.SaveProviders.Xbox.csproj", "{DDDE4732-FE3B-4F0E-8C1C-E3AF58E1B6E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegendsToolbox.SaveProviders.Xbox", "LegendsToolbox.SaveProviders.Xbox\LegendsToolbox.SaveProviders.Xbox.csproj", "{DDDE4732-FE3B-4F0E-8C1C-E3AF58E1B6E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadgerStructureEditor.Web", "BadgerStructureEditor.Web\BadgerStructureEditor.Web.csproj", "{ED35A0B3-7170-4F59-9435-3E119B1017F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

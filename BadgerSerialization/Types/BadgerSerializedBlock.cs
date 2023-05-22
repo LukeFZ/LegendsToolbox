@@ -18,23 +18,17 @@ public class BadgerSerializedBlock : BadgerObject
 
     public override void Serialize(BadgerBinaryWriter writer)
     {
-        if (Value.BlockId == 0)
+        if (Value.EntityRuntimeId != 0)
             throw new NotImplementedException();
 
-        writer.WriteVarUInt32(Value.BlockId + 1);
+        writer.WriteVarUInt32(Value.EntityRuntimeId + 1);
 
-        var hasBlock = Value.BlockId != 0;
+        var hasBlock = Value.EntityRuntimeId != 0;
         writer.Write(hasBlock);
 
         if (hasBlock)
         {
-            writer.WriteVarUInt64(Value.NameHash);
-            writer.Write((byte)Value.States.Count);
-            foreach (var state in Value.States)
-            {
-                writer.WriteVarUInt64(state.Key);
-                writer.Write(state.Value);
-            }
+            writer.Write(Value);
         }
     }
 
@@ -42,10 +36,10 @@ public class BadgerSerializedBlock : BadgerObject
     {
         Value = new SerializedBlock();
 
-        var unkBlockLength = reader.ReadVarUInt32();
-        Debug.Assert(unkBlockLength == 0, "unkBlockLength != 0");
+        var entityRuntimeId = reader.ReadVarUInt32() - 1;
+        Debug.Assert(entityRuntimeId == uint.MaxValue, "entityRuntimeId == uint.MaxValue");
 
-        if (unkBlockLength == 0)
+        if (entityRuntimeId == uint.MaxValue)
         {
             var hasSerializedBlock = reader.ReadBoolean();
             if (!hasSerializedBlock)
@@ -55,8 +49,7 @@ public class BadgerSerializedBlock : BadgerObject
         }
         else
         {
-            var unkBlockBytes = reader.ReadBytes((int)unkBlockLength);
-            Value = new SerializedBlock(0, 0, new Dictionary<ulong, byte>());
+            Value = new SerializedBlock(0, new Dictionary<ulong, byte>(), entityRuntimeId);
         }
     }
 

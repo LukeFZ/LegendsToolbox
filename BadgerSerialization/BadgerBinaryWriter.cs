@@ -29,6 +29,16 @@ public class BadgerBinaryWriter : BinaryWriter
     }
 
     [DebuggerStepThrough]
+    public void WriteVarInt64(long value)
+    {
+        var isNegative = value < 0;
+        if (isNegative)
+            WriteVarUInt64((ulong) ~(value << 1) | 1);
+        else
+            WriteVarUInt64((ulong) (value << 1));
+    }
+
+    [DebuggerStepThrough]
     public void WriteVarUInt32(uint value)
         => WriteVarUInt64(value);
 
@@ -62,11 +72,11 @@ public class BadgerBinaryWriter : BinaryWriter
     [DebuggerStepThrough]
     public void Write(SerializedBlock value)
     {
-        WriteVarUInt64(value.NameHash);
+        WriteVarInt64((long)value.NameHash);
         Write((byte)value.States.Count);
         foreach (var state in value.States)
         {
-            WriteVarUInt64(state.Key);
+            WriteVarInt64((long)state.Key);
             Write(state.Value);
         }
     }
