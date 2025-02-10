@@ -1,6 +1,4 @@
-using System.Numerics;
 using System.Text.Json.Serialization;
-using BadgerSerialization.Types;
 
 namespace BadgerStructureEditor.Web.Model;
 
@@ -19,13 +17,17 @@ public record StateInfo(string Name, [property:JsonConverter(typeof(JsonStringEn
 
 public class SerializedBlockInfo
 {
-    public string Name { get; set; } = string.Empty;
-    public Dictionary<string, byte> States { get; set; } = new();
+    public string Name { get; set; }
+    public ulong Hash { get; set; }
+    public Dictionary<string, byte> States { get; set; }
+    public bool Custom { get; set; }
 
-    public SerializedBlockInfo(string name, Dictionary<string, byte> states)
+    public SerializedBlockInfo(string name, ulong hash, Dictionary<string, byte> states, bool custom = false)
     {
         Name = name;
+        Hash = hash;
         States = states;
+        Custom = custom;
     }
 }
 

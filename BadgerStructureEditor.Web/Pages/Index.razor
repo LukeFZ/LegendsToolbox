@@ -87,7 +87,9 @@
                         var blockIdx = i;
                         var block = _blockPalette[blockIdx];
 
-                        <MudExpansionPanel Text="@block.Name">
+                        var nameStr = block.Custom ? $"{block.Name} (Custom Block)" : block.Name;
+
+                        <MudExpansionPanel Text="@nameStr">
                             <MudStack>
                                 <MudTextField T="string" ValueChanged="@(newName => SetBlock(blockIdx, newName))" Label="Change block name" />
                                 @foreach (var pair in block.States)
@@ -206,7 +208,6 @@
         {
             for (int i = 0; i < palette.Count; i++)
             {
-                Console.WriteLine(palette[i]);
                 if (palette[i] is Dictionary<string, dynamic> compoundPalette)
                     _blockPalette.Add(BlockProvider.ConvertBlock(compoundPalette));
                 else
@@ -254,7 +255,7 @@
             await using var writer = new BadgerBinaryWriter(ms);
 
             var block = new SerializedBlock(
-                BlockProvider.GetBlock(entry.Name)!.Hash,
+                entry.Hash,
                 entry.States.ToDictionary(
                     x => BlockProvider.GetState(x.Key)!.Hash,
                     x => x.Value)
@@ -297,11 +298,16 @@
         if (currentBlock.Name == newName)
             return;
 
-        var newInfo = BlockProvider.GetBlock(newName);
-        if (newInfo == null)
+        if (!newName.Contains(":"))
             return;
 
-        var newBlock = new SerializedBlockInfo(newName, newInfo.ValidStates.ToDictionary(x => x, _ => (byte) 0));
+        var oldStates = _blockPalette[blockIdx].States;
+
+        var newBlock = BlockProvider.Create(newName);
+
+        foreach (var (key, val) in oldStates)
+            if (newBlock.States.ContainsKey(key))
+                newBlock.States[key] = val;
 
         _blockPalette[blockIdx] = newBlock;
     }

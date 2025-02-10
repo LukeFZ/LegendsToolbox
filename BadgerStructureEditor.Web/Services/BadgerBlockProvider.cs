@@ -54,20 +54,40 @@ public class BadgerBlockProvider : IBlockProvider
             states[state.Name] = statePair.Value;
         }
 
-        return new SerializedBlockInfo(blockInfo.Name, states);
+        return new SerializedBlockInfo(blockInfo.Name, block.NameHash, states);
     }
 
     public SerializedBlockInfo ConvertBlock(Dictionary<string, dynamic> block)
     {
-        return new SerializedBlockInfo(Encoding.UTF8.GetString(block["name"]),
+        var blockName = Encoding.UTF8.GetString(block["name"]);
+        return new SerializedBlockInfo(blockName,
+            CalculateHash(blockName),
             ((Dictionary<string, dynamic>) block["states"])
-            .Where(x => x.Key != "block_automata_type" && x.Key != "block_automata_can_change")
+            .Where(x => x.Key != "block_automata_type" && x.Key != "block_automata_can_change" && x.Value.GetType() != typeof(byte[]))
             .ToDictionary(x => x.Key, x => (byte)x.Value));
     }
+
+    public SerializedBlockInfo Create(string name)
+        => new(name,
+            CalculateHash(name),
+            _stateNameLookup
+                .Where(x => x.Key != "block_automata_type" && x.Key != "block_automata_can_change")
+                .ToDictionary(x => x.Value.Name, _ => (byte) 0),
+            !_blockNameLookup.ContainsKey(name));
 
     public BlockInfo? GetBlock(string name)
         => _blockNameLookup.GetValueOrDefault(name);
 
     public StateInfo? GetState(string name)
         => _stateNameLookup.GetValueOrDefault(name);
+
+
+    private static ulong CalculateHash(string name)
+    {
+        var hashed = name.Contains(':')
+            ? name[(name.IndexOf(":", StringComparison.Ordinal) + 1)..]
+            : name;
+
+        return Encoding.UTF8.GetBytes(hashed).Aggregate(0xCBF29CE484222325uL, (current, byt) => byt ^ (0x100000001B3 * current));
+    }
 }
